@@ -1,16 +1,13 @@
 import requests
 import json 
-
-# endpoint
 import requests
 
-user_search = input("Enter a search: ")
-user_category = input("Enter a category: ")
-API_KEY = "94f7dc6dfe8e4c8485e4a8220c4c57f7"
-URL = f'https://newsapi.org/v2/top-headlines?category={user_category}&q={user_search}&apiKey={API_KEY}'
-r = requests.get(URL)
-data = r.json()
-print(data)
+def fetch_news(user_search, user_category, user_country):
+    API_KEY = "94f7dc6dfe8e4c8485e4a8220c4c57f7"
+    URL = f'https://newsapi.org/v2/top-headlines?category={user_category}&q={user_search}&country={user_country}&apiKey={API_KEY}'
+    r = requests.get(URL)
+    data = r.json()
+    return data
 
 # create a formatted string of the Python JSON object
 def jprint(obj):
@@ -19,7 +16,7 @@ def jprint(obj):
 
 # array w/ all urls to articles from search results
 urls = []
-def get_search_results(obj):
+def get_search_results(data):
     for item in data:
         if item == "articles":
             articles = data.get("articles")
@@ -131,8 +128,4 @@ def get_description(index):
                         if article[attribute] == url:
                             description = article["description"]
     return description
-
-#Test
-print(get_search_results(data))
-print(get_author(3))
 
