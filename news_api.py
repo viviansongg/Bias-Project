@@ -4,9 +4,9 @@ import json
 
 # endpoint
 
-def fetch_news(user_search, user_category, user_country):
+def fetch_news(user_search):
     API_KEY = "94f7dc6dfe8e4c8485e4a8220c4c57f7"
-    URL = f'https://newsapi.org/v2/top-headlines?category={user_category}&q={user_search}&country={user_country}&apiKey={API_KEY}'
+    URL = f'https://newsapi.org/v2/top-headlines?q={user_search}&apiKey={API_KEY}'
     r = requests.get(URL)
     data = r.json()
     return data
