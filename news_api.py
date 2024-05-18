@@ -1,6 +1,8 @@
+from newsplease import NewsPlease # for scraping web content
 import requests
-import json 
-import requests
+import json
+
+# endpoint
 
 def fetch_news(user_search, user_category, user_country):
     API_KEY = "94f7dc6dfe8e4c8485e4a8220c4c57f7"
@@ -73,9 +75,9 @@ def get_author(index):
     return author
 
 # get unformatted content of article (truncated to 200 chars) based on site url
-def get_content(index):
-    url= urls[index]
-    content = ""
+def get_content(url: str) -> str:
+    article = NewsPlease.from_url(url)
+    content = article.maintext
     for item in data:
         if item == "articles":
             articles = data.get("articles")
@@ -83,8 +85,8 @@ def get_content(index):
                 for attribute in article:
                     if attribute == "url":
                         if article[attribute] == url:
-                            content = article["content"]
-    return content
+                            return content
+    return "No content was found."
 
 # get date based on site url
 def get_date(index):
