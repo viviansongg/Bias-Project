@@ -1,11 +1,16 @@
-# API Key: 4d809cae2a004e219ed86d38d0780ca0
 import requests
 import json 
 
 # endpoint
-URL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=4d809cae2a004e219ed86d38d0780ca0"
+import requests
+
+user_search = input("Enter a search: ")
+user_category = input("Enter a category: ")
+API_KEY = "94f7dc6dfe8e4c8485e4a8220c4c57f7"
+URL = f'https://newsapi.org/v2/top-headlines?category={user_category}&q={user_search}&apiKey={API_KEY}'
 r = requests.get(URL)
 data = r.json()
+print(data)
 
 # create a formatted string of the Python JSON object
 def jprint(obj):
@@ -13,8 +18,8 @@ def jprint(obj):
     print(text)
 
 # array w/ all urls to articles from search results
+urls = []
 def get_search_results(obj):
-    urls = []
     for item in data:
         if item == "articles":
             articles = data.get("articles")
@@ -25,7 +30,8 @@ def get_search_results(obj):
     return urls
 
 # get source name of article based on site url
-def get_source_name(url: str) -> str:
+def get_source_name(index):
+    url= urls[index]
     source_name = ""
     for item in data:
         if item == "articles":
@@ -37,11 +43,11 @@ def get_source_name(url: str) -> str:
                             for x in article["source"]:
                                 if x == "name":
                                     source_name = article["source"][x]
-    print(source_name)
     return source_name
 
 # get source id of article based on site url
-def get_source_id(url: str) -> str:
+def get_source_id(index):
+    url= urls[index]
     source_id = ""
     for item in data:
         if item == "articles":
@@ -56,7 +62,8 @@ def get_source_id(url: str) -> str:
     return source_id
 
 # get author based on site url
-def get_author(url: str) -> str:
+def get_author(index):
+    url= urls[index]
     author = ""
     for item in data:
         if item == "articles":
@@ -69,7 +76,8 @@ def get_author(url: str) -> str:
     return author
 
 # get unformatted content of article (truncated to 200 chars) based on site url
-def get_content(url: str) -> str:
+def get_content(index):
+    url= urls[index]
     content = ""
     for item in data:
         if item == "articles":
@@ -82,7 +90,8 @@ def get_content(url: str) -> str:
     return content
 
 # get date based on site url
-def get_date(url: str) -> str:
+def get_date(index):
+    url= urls[index]
     date = ""
     for item in data:
         if item == "articles":
@@ -96,7 +105,8 @@ def get_date(url: str) -> str:
 
 
 # get title of article based on site url
-def get_title(url: str) -> str:
+def get_title(index):
+    url= urls[index]
     title = ""
     for item in data:
         if item == "articles":
@@ -109,7 +119,8 @@ def get_title(url: str) -> str:
     return title
 
 # get description of article based on site url
-def get_description(description: str) -> str:
+def get_description(index):
+    url= urls[index]
     description = ""
     for item in data:
         if item == "articles":
@@ -121,11 +132,7 @@ def get_description(description: str) -> str:
                             description = article["description"]
     return description
 
-
-
-# testing getter functions
-# get_author("https://www.nbcnews.com/politics/congress/house-passes-bill-rebuking-biden-pausing-weapons-israel-rcna152681")
-# get_date("https://www.nbcnews.com/politics/congress/house-passes-bill-rebuking-biden-pausing-weapons-israel-rcna152681")
-# get_content("https://www.nbcnews.com/politics/congress/house-passes-bill-rebuking-biden-pausing-weapons-israel-rcna152681")
-# get_source_name("https://www.nbcnews.com/politics/congress/house-passes-bill-rebuking-biden-pausing-weapons-israel-rcna152681")
+#Test
+print(get_search_results(data))
+print(get_author(3))
 
