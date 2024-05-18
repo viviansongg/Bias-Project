@@ -1,15 +1,11 @@
-from newsplease import NewsPlease # for scraping web content
+# API Key: 4d809cae2a004e219ed86d38d0780ca0
 import requests
-import json
+import json 
 
 # endpoint
-
-def fetch_news(user_search, user_category, user_country):
-    API_KEY = "94f7dc6dfe8e4c8485e4a8220c4c57f7"
-    URL = f'https://newsapi.org/v2/top-headlines?category={user_category}&q={user_search}&country={user_country}&apiKey={API_KEY}'
-    r = requests.get(URL)
-    data = r.json()
-    return data
+URL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=9bc92d5b9afe453eac7290d44ad9c4df"
+r = requests.get(URL)
+data = r.json()
 
 # create a formatted string of the Python JSON object
 def jprint(obj):
@@ -17,8 +13,8 @@ def jprint(obj):
     print(text)
 
 # array w/ all urls to articles from search results
-urls = []
-def get_search_results(data):
+def get_search_results(obj):
+    urls = []
     for item in data:
         if item == "articles":
             articles = data.get("articles")
@@ -29,8 +25,7 @@ def get_search_results(data):
     return urls
 
 # get source name of article based on site url
-def get_source_name(index):
-    url= urls[index]
+def get_source_name(url: str) -> str:
     source_name = ""
     for item in data:
         if item == "articles":
@@ -42,11 +37,11 @@ def get_source_name(index):
                             for x in article["source"]:
                                 if x == "name":
                                     source_name = article["source"][x]
+    print(source_name)
     return source_name
 
 # get source id of article based on site url
-def get_source_id(index):
-    url= urls[index]
+def get_source_id(url: str) -> str:
     source_id = ""
     for item in data:
         if item == "articles":
@@ -61,8 +56,7 @@ def get_source_id(index):
     return source_id
 
 # get author based on site url
-def get_author(index):
-    url= urls[index]
+def get_author(url: str) -> str:
     author = ""
     for item in data:
         if item == "articles":
@@ -72,12 +66,12 @@ def get_author(index):
                     if attribute == "url":
                         if article[attribute] == url:
                             author = article["author"]
+    print(author)
     return author
 
 # get unformatted content of article (truncated to 200 chars) based on site url
 def get_content(url: str) -> str:
-    article = NewsPlease.from_url(url)
-    content = article.maintext
+    content = ""
     for item in data:
         if item == "articles":
             articles = data.get("articles")
@@ -85,12 +79,11 @@ def get_content(url: str) -> str:
                 for attribute in article:
                     if attribute == "url":
                         if article[attribute] == url:
-                            return content
-    return "No content was found."
+                            content = article["content"]
+    return content
 
 # get date based on site url
-def get_date(index):
-    url= urls[index]
+def get_date(url: str) -> str:
     date = ""
     for item in data:
         if item == "articles":
@@ -104,8 +97,7 @@ def get_date(index):
 
 
 # get title of article based on site url
-def get_title(index):
-    url= urls[index]
+def get_title(url: str) -> str:
     title = ""
     for item in data:
         if item == "articles":
@@ -118,8 +110,7 @@ def get_title(index):
     return title
 
 # get description of article based on site url
-def get_description(index):
-    url= urls[index]
+def get_description(description: str) -> str:
     description = ""
     for item in data:
         if item == "articles":
@@ -130,4 +121,12 @@ def get_description(index):
                         if article[attribute] == url:
                             description = article["description"]
     return description
+
+
+
+# testing getter functions
+get_author("https://www.nbcnews.com/politics/congress/house-passes-bill-rebuking-biden-pausing-weapons-israel-rcna152681")
+get_date("https://www.nbcnews.com/politics/congress/house-passes-bill-rebuking-biden-pausing-weapons-israel-rcna152681")
+get_content("https://www.nbcnews.com/politics/congress/house-passes-bill-rebuking-biden-pausing-weapons-israel-rcna152681")
+get_source_name("https://www.nbcnews.com/politics/congress/house-passes-bill-rebuking-biden-pausing-weapons-israel-rcna152681")
 
