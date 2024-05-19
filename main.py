@@ -9,6 +9,10 @@ from bias_factors.pos_rating import determine_bias
 from bias_factors.citations_evaluate import evaluate_article
 from bias_factors.extension_evaluate import evaluate_urls
 
+@app.route('/', methods=['GET'])
+def default():
+    return "<h1>API host for Bias.io.</h1>"
+
 @app.route('/positivity', methods=['GET']) # returns pos_detail & sentiment score - /positivityReq?url= ...
 def positivity():
     print("Requesting positivity bias & sentiment analysis...")
