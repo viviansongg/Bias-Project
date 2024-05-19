@@ -42,7 +42,7 @@ input {
 }
 
 .scroll-container { 
-  margin-top: 500px; 
+  margin-top: 150px; 
 }
 
 .scrollable-body {
@@ -55,7 +55,6 @@ input {
   align-items: center; 
   border-radius: 20px;
   flex-direction: column;
-  max-height: calc(100vh - 200px);
   overflow-y: auto; 
   padding: 10px; 
 }
