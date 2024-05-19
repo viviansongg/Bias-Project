@@ -42,8 +42,9 @@ def generate_story(url):
         return "Please provide a valid URL."
 
 
-@app.route('/bias_scale')
+@app.route('/bias_scale', methods=['GET'])
 def bias_scale():
+    
     return send_file('bias_scale.html')
 
 

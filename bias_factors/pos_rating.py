@@ -1,4 +1,5 @@
 import news_api
+import os
 # from search import urls
 from bs4 import BeautifulSoup
 import requests
