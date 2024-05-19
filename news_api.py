@@ -130,4 +130,3 @@ def get_description(index):
                         if article[attribute] == url:
                             description = article["description"]
     return description
-

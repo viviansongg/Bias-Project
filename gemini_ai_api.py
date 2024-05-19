@@ -1,6 +1,12 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, send_file
+import os
+import sys
 import requests
 import google.generativeai as genai
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from bias_factors.political_view.with_csv import calculate_bias_level
+from news_api import get_date
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -19,27 +25,27 @@ def get_article_content(url):
         return None
 
 @app.route('/', methods=['GET', 'POST'])
-def generate_story():
-    if request.method == 'POST':
-        url = request.form.get('url')
-        if url:
-            article_content = get_article_content(url)
-            if article_content:
-                prompt = " Does this following article show any bias?:" + article_content[:1000]
-                response = model.generate_content(prompt)
-                return Response(response.text, content_type='text/plain; charset=utf-8')
-            else:
-                return "Unable to fetch content from the provided URL."
+def generate_story(url):
+    if url:
+        article_content = get_article_content(url)
+        if article_content:
+            prompt = "Determine if this article is left or right wing and display the key words that indicate to one end" + article_content[:1000]
+            bias_ratio, leaning = calculate_bias_level(url)
+            bias_percent = round(bias_ratio*100, 2)
+            response = model.generate_content(prompt)
+            iframe_html = f'<iframe src="/bias_scale" width="30%" height="50px" style="border: none;"></iframe>'
+
+            return f"{response.text}"
         else:
-            return "Please provide a valid URL."
+            return "Unable to fetch content from the provided URL."
     else:
-        return """
-        <form method="post">
-            <label for="url">Enter the URL:</label><br>
-            <input type="text" id="url" name="url"><br>
-            <input type="submit" value="Submit">
-        </form>
-        """
+        return "Please provide a valid URL."
+
+
+@app.route('/bias_scale')
+def bias_scale():
+    return send_file('bias_scale.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
