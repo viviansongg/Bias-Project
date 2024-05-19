@@ -1,11 +1,15 @@
 import os
 import pandas as pd
 import requests
-import os
 from bs4 import BeautifulSoup
 
-organizations_df = pd.read_csv("./organizations.csv")
-keywords_df = pd.read_csv("./keywords.csv")
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+org_path = os.path.join(script_dir, 'organizations.csv')
+keyword_path = os.path.join(script_dir, 'keywords.csv')
+
+organizations_df = pd.read_csv(org_path)
+keywords_df = pd.read_csv(keyword_path)
 
 def calculate_bias_level(url):
     if '[' in url:
