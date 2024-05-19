@@ -11,7 +11,7 @@ neg_keyword= []
 analyzer = SentimentIntensityAnalyzer()
 
 def determine_bias(url):
-    url = url[0]
+    url = url[0:]
     url = url.lstrip("[").rstrip("]")
     response=requests.get(url)
     soup= BeautifulSoup(response.content,'html.parser')
