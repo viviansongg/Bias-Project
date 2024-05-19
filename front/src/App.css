@@ -1,0 +1,52 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxP.ttf) format('truetype');
+}
+
+.searchbar { 
+  width: 1023px;
+  height: 86px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  background: #FFF;
+  border-width: 0px; 
+}
+
+.searchbar::placeholder { 
+  color: #969595;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center; 
+}
+
+input { 
+  color: #969595;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center; 
+}
+
+.title { 
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 100px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align : center;
+  margin-top: 200px;
+}
+
+@media (max-width: 768px) {
+  .searchbar {
+    width: 100%; /* Make the search bar full width on smaller screens */
+  }
+}
