@@ -1,5 +1,5 @@
-import news_api as NewsAPI
-from search import urls
+import news_api
+# from search import urls
 from bs4 import BeautifulSoup
 import requests
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -9,18 +9,7 @@ pos_keyword= []
 neg_keyword= []
 analyzer = SentimentIntensityAnalyzer()
 
-def determine_bias(index):
-   if len(urls)==0: 
-       return ("No search results")
-   
-   while index > len(urls):
-       try:
-           index= int(input("Index out of range. Enter a new article index: "))
-       except:
-           print ("Index Out of Range")
-
-   url= urls[index]
-   print(url)
+def determine_bias(url):
    response=requests.get(url)
    soup= BeautifulSoup(response.content,'html.parser')
   
@@ -43,4 +32,5 @@ def determine_bias(index):
    else:
         print("The article has a neutral sentiment.")
 
-determine_bias(2)
+#Test
+#determine_bias('https://www.nextbigfuture.com/2024/03/how-does-ai-make-tesla-fsd-12-3-human-like-deep-dive-analysis.html')
