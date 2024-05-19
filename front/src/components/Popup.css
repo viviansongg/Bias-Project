@@ -1,0 +1,128 @@
+/* src/Popup.css */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    max-height: 80vh; /* Limits the height to make it scrollable */
+    overflow-y: auto; /* Enables vertical scrolling */
+    background-image: linear-gradient(white, #8BB3E4);
+  }
+  
+  .popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .popup-content {
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+  
+  
+  .source {
+    color: #4E4C4C;
+    font-family: Gelion;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 0.3px;
+  }
+
+  .date {
+    color: #4E4C4C;
+    text-align: right;
+    font-family: Gelion;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .url {
+    margin-top: 0.5px;
+    color: #000;
+    font-family: Gelion;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .title {
+    color: #4E4C4C;
+    font-family: Gelion;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .desc {
+    color: #4E4C4C;
+    font-family: Gelion;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px; /* 150% */
+  }
+
+  .summary {
+    color: #4E4C4C;
+    font-family: Gelion;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+  }
+
+  #HASH {
+    width: 100%;
+  }
+  
+  #HASH div {
+    width: 49%;
+    display: inline-block;
+  }
+  
+  #right {
+    text-align: right;
+  }
+
+  .square1 {
+    width: 395px;
+    height: 215px;
+    border-radius: 20px;
+    background: #C0C0C0;
+  }
+
+  .square2 {
+    width: 395px;
+    height: 215px;
+    border-radius: 20px;
+    background: #C0C0C0;
+    position: right
+  }
