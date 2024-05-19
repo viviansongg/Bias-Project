@@ -2,8 +2,8 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-organizations_df = pd.read_csv("/Users/lynjung/Documents/project/bias_factors/political_view/organizations.csv")
-keywords_df = pd.read_csv("/Users/lynjung/Documents/project/bias_factors/political_view/keywords.csv")
+organizations_df = pd.read_csv("./organizations.csv")
+keywords_df = pd.read_csv("./keywords.csv")
 
 def calculate_bias_level(url):
     if '[' in url:
